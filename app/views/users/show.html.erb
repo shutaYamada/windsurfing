@@ -1,0 +1,15 @@
+<div class="container text-center">
+    <div class="mt-5"><%= image_tag @user.get_profile_image(150, 200), class: "rounded-circle" %></div>
+    <h3><%= @user.name %><%= @user.sail_no %></h3>
+    <div class="row">
+        <h5 class="col-6">ゲレンデ:<%= @user.gerende %></h5>
+        <h5 class="col-6"><i class="fa-solid fa-pen-to-square"></i><%= link_to "プロフィール編集", edit_user_path,class: "btn btn-sm btn-danger" %></h5>
+    </div>
+    
+    <div class="mt-4">
+        <h4><%= Date.current.month %>月の出艇回数 <%= @departure_month.count %>回</h4>
+    </div>
+    
+</div>
+
+

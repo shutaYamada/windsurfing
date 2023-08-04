@@ -1,0 +1,31 @@
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>名前</th>
+                <th>セールナンバー</th>
+                <th>マイページ</th>
+            </tr>
+        </thead>
+            <% @users.each do |user| %>
+        <tbody>
+            <tr>
+                <td><%= user.name %></td>
+                <td><%= user.sail_no %></td>
+                <% if user == current_user %>
+                    <td><%= link_to "マイページ", user_path(current_user.id),class: "btn btn-sm btn-danger" %></td>
+                <% else %>
+                    <td></td>
+                <% end %>
+            </tr>
+        </tbody>
+            <% end %>
+    </table>
+</div>
+
+
+
+
+
+
+

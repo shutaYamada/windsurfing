@@ -1,0 +1,48 @@
+<div class="container mt-1 text-center">
+  <div class="row mb-3">
+        <a href="https://www6.kaiho.mlit.go.jp/03kanku/yokohama/kisyou.html" class="btn btn-primary" target="_blank">海上保安庁風速</a>
+  </div>
+    <% (@start_date..@end_date).each do |date| %>
+    
+      <div>
+        <h3 class="text-center"><%= link_to date, new_departure_path(date: date),class: 'btn btn-secondary btn-lg'%></h3>
+      </div>
+      <div class="border border-secondary mb-4">
+      <% if @departures[date].present? %>
+        <% @departures[date].each do |event| %>
+          <div class="card mb-2 mt-2" style="width:60%; margin: auto;">
+            <div class="text-center">
+              <h4><%= image_tag event.user.get_profile_image(30, 30), class: "rounded-circle" %><%= event.user.name %> <%= event.user.sail_no %></h4>
+              <div><%= event.start_time.strftime("%H:%M") %>~<%= event.end_time.strftime("%H:%M") %></div>
+              <div><%= event.comment %></div>
+              <% if event.user == current_user %>
+                <%= link_to "削除", departure_path(event), method: :delete %>
+                <%= link_to "編集", edit_departure_path(event) %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>      
+        <% else %>   
+          <h4 class="text-center">出艇者はいません</h4>  
+      <% end %> 
+    </div>
+    <% end %>
+    
+  <% if Date.current.wday == 0 %>
+  <div>
+    <h1>未出艇者</h1>
+    <ul>
+      <% @non_depper.each do |user| %>
+        <li><%= user.name %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% else %>
+  <div> </div>
+  <% end %>
+</div>
+
+
+  
+
+
